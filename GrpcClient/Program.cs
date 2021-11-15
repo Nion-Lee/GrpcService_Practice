@@ -1,10 +1,10 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
-using GrpcService0709;
+using GrpcService;
 using System;
 using System.Threading.Tasks;
 
-namespace ConsoleApp0709
+namespace GrpcClient
 {
     class Program
     {
@@ -13,12 +13,13 @@ namespace ConsoleApp0709
             var channel = GrpcChannel.ForAddress("https://localhost:5001/");
             var client = new Greeter.GreeterClient(channel);
 
-            //var response = await client.SayHelloAsync(new HelloRequest 
-            //{ 
-            //    Name = "Nion好帥"  
-            //});
+            var response = await client.SayHelloAsync(new HelloRequest
+            {
+                Name = "Nion微帥"
+            });
 
-            //Console.WriteLine("From people: " + response.Message);
+            Console.WriteLine("From people: " + response.Message);
+
             var call = client.SayHelloStream(new HelloRequest
             {
                 Name = ".NET Conf streaming"
